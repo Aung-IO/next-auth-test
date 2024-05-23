@@ -1,12 +1,18 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import Google from "next-auth/providers/google";
 
-const User = {
-  name: "apwiz",
-  email: "apkdust@gmail.com",
-  password: "apkdust",
-};
+// const User = {
+//   name: "apwiz",
+//   email: "apkdust@gmail.com",
+//   password: "apkdust",
+// };
+let storedUser: any = null;
+function getStoredUser() {
+  if (typeof window === "undefined" && !storedUser) {
+    storedUser = JSON.parse(localStorage.getItem("user") || "");
+  }
+  return storedUser;
+}
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -21,12 +27,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
 
       async authorize(credentials: any) {
+        const user = getStoredUser();
         if (
-          credentials.email === User.email &&
-          credentials.password === User.password
+          user &&
+          credentials.email === user.email &&
+          credentials.password === user.password
         )
           return {
-            name: User.name,
+            name: user.name,
           };
         else return null;
       },
