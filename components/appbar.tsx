@@ -1,5 +1,5 @@
-import { auth, signIn, signOut } from "@/auth"
-import Link from "next/link"
+import Link from "next/link";
+import { auth, signIn, signOut } from "../pages/api/auth/[...nextauth]";
 
 
 export default async function Appbar() {
@@ -22,11 +22,16 @@ export default async function Appbar() {
                             </form>
                         </div>)
                         : (<div className="flex items-center space-x-2 ">
+                            {/* <Link href={"/auth/login"}>
+                                <button className="hover:text-gray-400" type="submit">Log in</button>
+                            </Link> */}
                             <form action={async () => {
                                 "use server"
                                 await signIn()
                             }}>
-                                <button className="hover:text-gray-400 border-r-2" type="submit">Sign In</button>
+                                <Link href={"/auth/login"}>
+                                    <button className="hover:text-gray-400" type="submit">Login</button>
+                                </Link>
                             </form>
 
                             <Link href={"/auth/register"}>
