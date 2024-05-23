@@ -5,9 +5,9 @@ export default async function Appbar() {
     const session = await auth()
     return (
         <div className="bg-gray-800 text-white py-4">
-            <div className="container mx-auto flex justify-between items-center">
+            <div className="container mx-auto flex justify-between items-center px-4">
 
-                <div className="text-xl font-bold">Logo</div>
+                <div className="text-xl font-bold">LOGO</div>
 
                 <div className="flex space-x-4">
                     {session && session.user ?
@@ -28,8 +28,7 @@ export default async function Appbar() {
                                 <button className="hover:text-gray-400" type="submit">Sign In</button>
                             </form>
                         </div>)}
-                    {/* <a href="#" className="hover:text-gray-400">Sign In</a>
-                    <a href="#" className="hover:text-gray-400">Sign Up</a> */}
+
                 </div>
             </div>
         </div>

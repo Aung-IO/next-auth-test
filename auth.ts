@@ -2,9 +2,14 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 
+const User = {
+  name: "apwiz",
+  email: "apkdust@gmail.com",
+  password: "apkdust",
+};
+
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
-    Google,
     Credentials({
       credentials: {
         email: {
@@ -17,11 +22,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
       async authorize(credentials: any) {
         if (
-          credentials.email === "apkdust@gmail.com" &&
-          credentials.password === "apkdust"
+          credentials.email === User.email &&
+          credentials.password === User.password
         )
           return {
-            name: "apwiz",
+            name: User.name,
           };
         else return null;
       },
